@@ -13,18 +13,18 @@ const NameSwitcher: React.FC = () => {
   return (
     <span className="inline-grid">
       <span
-        className={`col-start-1 row-start-1 transition-all duration-800 ${
+        className={`text-start col-start-1 row-start-1 transition-all duration-800 ${
           showAlt ? "inactive-text" : "active-text"
         }`}
       >
-        djaevil
+        Sigge
       </span>
       <span
-        className={`text-start col-start-1 row-start-1 transition-all duration-800 ${
+        className={`col-start-1 row-start-1 transition-all duration-800 ${
           showAlt ? "active-text" : "inactive-text"
         }`}
       >
-        Sigge
+        djaevil
       </span>
     </span>
   );

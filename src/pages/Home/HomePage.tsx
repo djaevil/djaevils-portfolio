@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import NameSwitcher from "@/components/NameSwitcher";
+import HeroSection from "@/components/HeroSection";
 import ProjectCard from "@/features/projects/components/ProjectCard";
 import { projects } from "@/features/projects/data/projects";
 
@@ -49,19 +50,15 @@ const HomePage: React.FC = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="py-24 px-8 bg-linear-to-b from-gray-800 to-gray-900 text-white">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-3xl font-bold mb-4">
+      <HeroSection
+        title={
+          <>
             Hi, I'm <NameSwitcher />
-          </h1>
-          <p className="text-xl max-w-2xl mx-auto mb-6 text-gray-300">
-            A developer who builds web applications and other things.
-          </p>
-          <div className="inline-block px-3 py-1 bg-green-400 text-gray-900 text-sm rounded">
-            Available for new projects
-          </div>
-        </div>
-      </section>
+          </>
+        }
+        description="A developer who builds web applications and other things."
+        badge="Available for new projects"
+      />
 
       {/* Two Column: Projects + Stats */}
       <section className="px-8 py-16 max-w-6xl mx-auto">
@@ -198,11 +195,15 @@ const HomePage: React.FC = () => {
               <ul className="text-sm space-y-3 text-gray-600">
                 <li className="flex items-center gap-3">
                   <div className="w-1.5 h-1.5 bg-green-700 rounded-full"></div>
-                  Location: Skåne, Sweden
+                  Name: Sigge Kingborg
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-1.5 h-1.5 bg-green-700 rounded-full"></div>
-                  Available for work
+                  Age: 23
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className="w-1.5 h-1.5 bg-green-700 rounded-full"></div>
+                  Location: Skåne, Sweden
                 </li>
               </ul>
             </div>

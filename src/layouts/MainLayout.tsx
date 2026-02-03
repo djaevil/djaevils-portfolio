@@ -2,23 +2,25 @@ import React from "react";
 import { Outlet, Link } from "react-router-dom";
 
 const MainLayout: React.FC = () => {
+  const djaevil = "<djaevil.dev />";
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Navbar */}
       <nav className="bg-gray-900 text-white">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="text-lg font-semibold">
-            djaevil.dev
+          <Link to="/" className="text-lg font-semibold font-mono">
+            {djaevil}
           </Link>
-          <div className="space-x-6 text-sm">
+          <div className="space-x-8 text-sm font-semibold">
             <Link to="/" className="nav-link">
               Home
             </Link>
             <Link to="/about" className="nav-link">
-              About
+              About Me
             </Link>
-            <Link to="/contact" className="nav-link">
-              Contact
+            <Link to="/socials" className="nav-link">
+              Socials
             </Link>
           </div>
         </div>
