@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import NameSwitcher from "@/components/NameSwitcher";
 import ProjectCard from "@/features/projects/components/ProjectCard";
 import { projects } from "@/features/projects/data/projects";
@@ -6,6 +6,45 @@ import { projects } from "@/features/projects/data/projects";
 const HomePage: React.FC = () => {
   const [clicks, setClicks] = useState(0);
   const [totalVisits] = useState(0);
+  const [selectedTag, setSelectedTag] = useState<string>("All");
+  const [selectedStatus, setSelectedStatus] = useState<string>("All");
+  const [showAllProjects, setShowAllProjects] = useState(false);
+
+  // Extract unique tags from all projects
+  const allTags = useMemo(() => {
+    const tags = new Set<string>();
+    projects.forEach((project) => {
+      project.tags.forEach((tag) => tags.add(tag));
+    });
+    return ["All", ...Array.from(tags).sort()];
+  }, []);
+
+  // Define all possible statuses
+  const allStatuses = [
+    "All",
+    "Completed",
+    "In-progress",
+    "On hold",
+    "Upcoming",
+  ];
+
+  // Filter projects based on selected tag and status
+  const filteredProjects = useMemo(() => {
+    return projects.filter((project) => {
+      const matchesTag =
+        selectedTag === "All" || project.tags.includes(selectedTag);
+      const matchesStatus =
+        selectedStatus === "All" || project.status === selectedStatus;
+      return matchesTag && matchesStatus;
+    });
+  }, [selectedTag, selectedStatus]);
+
+  // Limit displayed projects to 4 unless showAllProjects is true
+  const displayedProjects = showAllProjects
+    ? filteredProjects
+    : filteredProjects.slice(0, 4);
+
+  const hasMoreProjects = filteredProjects.length > 4;
 
   return (
     <>
@@ -32,11 +71,95 @@ const HomePage: React.FC = () => {
             <h2 className="mb-8 text-gray-900 text-2xl font-bold">
               My Projects
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {projects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
+
+            {/* Filters */}
+            <div className="flex flex-wrap gap-4 mb-8">
+              {/* Tag Filter */}
+              <div className="flex flex-col gap-2">
+                <label
+                  htmlFor="tag-filter"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  Filter by Tag
+                </label>
+                <select
+                  id="tag-filter"
+                  value={selectedTag}
+                  onChange={(e) => setSelectedTag(e.target.value)}
+                  className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                >
+                  {allTags.map((tag) => (
+                    <option key={tag} value={tag}>
+                      {tag}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Status Filter */}
+              <div className="flex flex-col gap-2">
+                <label
+                  htmlFor="status-filter"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  Filter by Status
+                </label>
+                <select
+                  id="status-filter"
+                  value={selectedStatus}
+                  onChange={(e) => setSelectedStatus(e.target.value)}
+                  className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                >
+                  {allStatuses.map((status) => (
+                    <option key={status} value={status}>
+                      {status}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Clear Filters Button */}
+              {(selectedTag !== "All" || selectedStatus !== "All") && (
+                <div className="flex items-end">
+                  <button
+                    onClick={() => {
+                      setSelectedTag("All");
+                      setSelectedStatus("All");
+                    }}
+                    className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 underline"
+                  >
+                    Clear filters
+                  </button>
+                </div>
+              )}
             </div>
+
+            {/* Projects Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {displayedProjects.length > 0 ? (
+                displayedProjects.map((project) => (
+                  <ProjectCard key={project.id} project={project} />
+                ))
+              ) : (
+                <p className="text-gray-500 col-span-2 text-center py-8">
+                  No projects match the selected filters.
+                </p>
+              )}
+            </div>
+
+            {/* Show All / Show Less Button */}
+            {hasMoreProjects && (
+              <div className="mt-8 text-center">
+                <button
+                  onClick={() => setShowAllProjects(!showAllProjects)}
+                  className="px-6 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors"
+                >
+                  {showAllProjects
+                    ? "Show less"
+                    : `Show all (${filteredProjects.length - 4} more)`}
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Stats Sidebar */}
