@@ -41,6 +41,6 @@ export const timelineEvents: TimelineEvent[] = [
     age: "21-23 years old",
     title: "The Professional Journey Begins",
     description:
-      "Studied Fullstack development and got my first professional role as a Fullstack Developer. During this time, I worked on various projects, honing my skills in both frontend and backend development as well as cloud technologies.",
+      "I pulled myself together, studied Fullstack development, and got my first professional role as a Fullstack Developer. During this time, I worked on various projects, honing my skills in both frontend and backend development, as well as cloud technologies.",
   },
 ];

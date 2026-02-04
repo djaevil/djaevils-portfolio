@@ -166,7 +166,7 @@ const HomePage: React.FC = () => {
             </h2>
 
             <div className="bg-linear-to-br from-gray-800 to-gray-900 text-white p-6 rounded-xl shadow-lg">
-              <p className="text-xl text-center mb-2 text-gray-400">
+              <p className="text-xl text-center mb-2 text-white font-semibold">
                 Total Visits
               </p>
               <div className="flex flex-col items-center">
@@ -176,14 +176,14 @@ const HomePage: React.FC = () => {
             </div>
 
             <div className="bg-linear-to-br from-green-500 to-green-600 text-white p-6 rounded-xl shadow-lg">
-              <p className="text-xl text-center mb-4 text-green-100 font-bold">
+              <p className="text-xl text-center mb-4 text-white font-semibold">
                 Click Counter
               </p>
               <div className="text-3xl text-center mb-6">{clicks}</div>
               <div className="text-center">
                 <button
                   onClick={() => setClicks(clicks + 1)}
-                  className="px-5 py-2 bg-white text-green-950 font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-md"
+                  className="px-5 py-2 bg-white text-green-950 font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-md cursor-pointer"
                 >
                   Click Me!
                 </button>

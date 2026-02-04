@@ -19,8 +19,8 @@ const MainLayout: React.FC = () => {
             <Link to="/about" className="nav-link">
               About Me
             </Link>
-            <Link to="/socials" className="nav-link">
-              Socials
+            <Link to="/contact" className="nav-link">
+              Get In Touch
             </Link>
           </div>
         </div>
