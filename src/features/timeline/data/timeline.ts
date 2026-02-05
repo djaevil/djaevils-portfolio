@@ -20,7 +20,7 @@ export const timelineEvents: TimelineEvent[] = [
     age: "16-19 years old",
     title: "Learning & Creating",
     description:
-      "I got properly introduced to IoT and programming through high school and new friends. This inspired me to build my own security camera. I was able to scrape together parts and code it myself using Python and some basic electronics.",
+      "I got properly introduced to IoT and programming through high school and new friends. This inspired me to build my own security camera, among other things. I was able to scrape together parts and code it myself using Python and some basic electronics.",
   },
   {
     year: "2022",
@@ -41,6 +41,6 @@ export const timelineEvents: TimelineEvent[] = [
     age: "21-23 years old",
     title: "The Professional Journey Begins",
     description:
-      "I pulled myself together, studied Fullstack development, and got my first professional role as a Fullstack Developer. During this time, I worked on various projects, honing my skills in both frontend and backend development, as well as cloud technologies.",
+      "I pulled myself together, studied Fullstack development, and got my first professional role as a Fullstack Developer. During this time, I worked on various projects, honing my skills in both frontend and backend development, as well as cloud technologies and DevOps.",
   },
 ];

@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
 import { timelineEvents } from "@/features/timeline/data/timeline";
 
 const AboutPage: React.FC = () => {
   const [showTimeline, setShowTimeline] = useState(false);
+  const [timelineHeight, setTimelineHeight] = useState<number | undefined>(
+    undefined,
+  );
+  const timelineRef = useRef<HTMLDivElement>(null);
 
   const favoriteArtists = [
     "Dave",
@@ -30,6 +34,13 @@ const AboutPage: React.FC = () => {
     "Dark Souls III",
     "Dying Light",
   ];
+
+  // Measure timeline height for animation
+  useEffect(() => {
+    if (timelineRef.current) {
+      setTimelineHeight(timelineRef.current.scrollHeight);
+    }
+  }, []);
 
   return (
     <>
@@ -78,13 +89,13 @@ const AboutPage: React.FC = () => {
             </p>
             <button
               onClick={() => setShowTimeline(!showTimeline)}
-              className="px-6 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors inline-flex items-center gap-2"
+              className="px-6 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors inline-flex items-center gap-2 cursor-pointer"
             >
               {showTimeline ? (
                 <>
                   <span>Hide Timeline</span>
                   <svg
-                    className="w-4 h-4"
+                    className={`w-4 h-4 transition-transform duration-300`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -101,7 +112,7 @@ const AboutPage: React.FC = () => {
                 <>
                   <span>Show Timeline</span>
                   <svg
-                    className="w-4 h-4"
+                    className={`w-4 h-4 transition-transform duration-300`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -118,8 +129,15 @@ const AboutPage: React.FC = () => {
             </button>
           </div>
 
-          {/* Timeline Content */}
-          {showTimeline && (
+          {/* Timeline Content - Animated */}
+          <div
+            ref={timelineRef}
+            className="overflow-hidden transition-all duration-700 ease-in-out"
+            style={{
+              maxHeight: showTimeline ? timelineHeight : 0,
+              opacity: showTimeline ? 1 : 0,
+            }}
+          >
             <div className="relative mt-12">
               {/* Timeline line - centered */}
               <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-green-400 via-gray-300 to-green-400 transform md:-translate-x-1/2"></div>
@@ -130,7 +148,19 @@ const AboutPage: React.FC = () => {
                   const isLeft = index % 2 === 0;
 
                   return (
-                    <div key={index} className="relative">
+                    <div
+                      key={index}
+                      className={`relative transition-all duration-500 delay-${index * 100}`}
+                      style={{
+                        transitionDelay: showTimeline
+                          ? `${index * 75}ms`
+                          : "0ms",
+                        opacity: showTimeline ? 1 : 0,
+                        transform: showTimeline
+                          ? "translateY(0)"
+                          : "translateY(20px)",
+                      }}
+                    >
                       {/* Desktop Layout - Alternating sides */}
                       <div className="hidden md:grid md:grid-cols-2 md:gap-12 items-center">
                         {isLeft ? (
@@ -209,7 +239,7 @@ const AboutPage: React.FC = () => {
                 })}
               </div>
             </div>
-          )}
+          </div>
         </div>
       </section>
 
@@ -221,17 +251,21 @@ const AboutPage: React.FC = () => {
           </h2>
           <div className="prose prose-lg text-gray-900 space-y-4">
             <p>
-              This website is certainly my developer portfolio, and it's in a
-              very early stage right now, but I don't want it to be a static
-              site that just sits there. I want it to be a unique and engaging
-              space where you can interact with my work, not only read about it.
+              While this website certainly serves as my developer portfolio,
+              it's in an{" "}
+              <span className="font-semibold">early stage of development</span>{" "}
+              right now. I don't want it to be a static site that just sits
+              there. That's boring. I want it to be a unique and engaging space
+              where you can interact with my work, not only read about it.
             </p>
             <p>
-              Try to envision a digital themepark. A place where you can come
-              and go, interact with others, play games, or just feel out the
-              vibe. That's my vision for this website. I want to keep adding new
-              features, projects and content over time to make it a living,
-              breathing representation of who I am as a developer and person.
+              Try to envision a{" "}
+              <span className="font-semibold">digital themepark</span>. A place
+              where you can come and go, interact with others, play games, or
+              just feel out the vibe. That's my vision for this website. I want
+              to keep adding new features, projects and content over time to
+              make it a living, breathing representation of who I am as a
+              developer and person.
             </p>
             <p>
               <span className="font-semibold">So stay tuned!</span> There's much

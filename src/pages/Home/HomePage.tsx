@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import NameSwitcher from "@/components/NameSwitcher";
 import HeroSection from "@/components/HeroSection";
 import ProjectCard from "@/features/projects/components/ProjectCard";
@@ -10,6 +10,10 @@ const HomePage: React.FC = () => {
   const [selectedTag, setSelectedTag] = useState<string>("All");
   const [selectedStatus, setSelectedStatus] = useState<string>("All");
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const [contentHeight, setContentHeight] = useState<number | undefined>(
+    undefined,
+  );
+  const expandableRef = useRef<HTMLDivElement>(null);
 
   // Extract unique tags from all projects
   const allTags = useMemo(() => {
@@ -40,12 +44,19 @@ const HomePage: React.FC = () => {
     });
   }, [selectedTag, selectedStatus]);
 
-  // Limit displayed projects to 4 unless showAllProjects is true
-  const displayedProjects = showAllProjects
-    ? filteredProjects
-    : filteredProjects.slice(0, 4);
+  // Projects to show initially (first 4)
+  const initialProjects = filteredProjects.slice(0, 4);
+  // Additional projects (after first 4)
+  const additionalProjects = filteredProjects.slice(4);
 
   const hasMoreProjects = filteredProjects.length > 4;
+
+  // Measure the height of additional content for animation
+  useEffect(() => {
+    if (expandableRef.current) {
+      setContentHeight(expandableRef.current.scrollHeight);
+    }
+  }, [additionalProjects]);
 
   return (
     <>
@@ -131,10 +142,10 @@ const HomePage: React.FC = () => {
               )}
             </div>
 
-            {/* Projects Grid */}
+            {/* Projects Grid - Initial Projects */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {displayedProjects.length > 0 ? (
-                displayedProjects.map((project) => (
+              {initialProjects.length > 0 ? (
+                initialProjects.map((project) => (
                   <ProjectCard key={project.id} project={project} />
                 ))
               ) : (
@@ -144,12 +155,30 @@ const HomePage: React.FC = () => {
               )}
             </div>
 
+            {/* Expandable Additional Projects */}
+            {hasMoreProjects && (
+              <div
+                ref={expandableRef}
+                className="overflow-hidden transition-all duration-500 ease-in-out"
+                style={{
+                  maxHeight: showAllProjects ? contentHeight : 0,
+                  opacity: showAllProjects ? 1 : 0,
+                }}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
+                  {additionalProjects.map((project) => (
+                    <ProjectCard key={project.id} project={project} />
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Show All / Show Less Button */}
             {hasMoreProjects && (
               <div className="mt-8 text-center">
                 <button
                   onClick={() => setShowAllProjects(!showAllProjects)}
-                  className="px-6 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors"
+                  className="px-6 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors cursor-pointer"
                 >
                   {showAllProjects
                     ? "Show less"
