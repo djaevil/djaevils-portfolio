@@ -10,7 +10,7 @@ const AboutPage: React.FC = () => {
     "Eve",
     "datfootdive",
     "Kendrick Lamar",
-    "Nujabes",
+    "Ludwig Göransson",
     "James Blake",
     "21 Savage",
     "J. Cole",
@@ -221,17 +221,17 @@ const AboutPage: React.FC = () => {
           </h2>
           <div className="prose prose-lg text-gray-900 space-y-4">
             <p>
-              This website is my certainly my developer portfolio, but I don't
-              want it to be a static site that just sits there. I want it to be
-              a unique and engaging space where you can interact with my
-              projects, not only read about them.
+              This website is certainly my developer portfolio, and it's in a
+              very early stage right now, but I don't want it to be a static
+              site that just sits there. I want it to be a unique and engaging
+              space where you can interact with my work, not only read about it.
             </p>
             <p>
               Try to envision a digital themepark. A place where you can come
               and go, interact with others, play games, or just feel out the
-              vibe. I want to keep adding new features, projects and content
-              over time to make it a living, breathing representation of who I
-              am as a developer and person.
+              vibe. That's my vision for this website. I want to keep adding new
+              features, projects and content over time to make it a living,
+              breathing representation of who I am as a developer and person.
             </p>
             <p>
               <span className="font-semibold">So stay tuned!</span> There's much

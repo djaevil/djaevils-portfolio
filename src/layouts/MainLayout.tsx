@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 
 const MainLayout: React.FC = () => {
   const djaevil = "<djaevil.dev />";
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -12,7 +16,9 @@ const MainLayout: React.FC = () => {
           <Link to="/" className="text-lg font-semibold font-mono">
             {djaevil}
           </Link>
-          <div className="space-x-8 text-sm font-semibold">
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex space-x-8 text-sm font-semibold">
             <Link to="/" className="nav-link">
               Home
             </Link>
@@ -20,6 +26,49 @@ const MainLayout: React.FC = () => {
               About Me
             </Link>
             <Link to="/contact" className="nav-link">
+              Get In Touch
+            </Link>
+          </div>
+
+          {/* Hamburger Button */}
+          <button
+            onClick={toggleMenu}
+            className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5"
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+          >
+            <span
+              className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${
+                isMenuOpen ? "rotate-45 translate-y-2" : ""
+              }`}
+            />
+            <span
+              className={`block w-6 h-0.5 bg-white transition-opacity duration-300 ${
+                isMenuOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${
+                isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+              }`}
+            />
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ${
+            isMenuOpen ? "max-h-48" : "max-h-0"
+          }`}
+        >
+          <div className="px-6 pb-4 flex flex-col space-y-4 text-sm font-semibold">
+            <Link to="/" className="nav-link" onClick={closeMenu}>
+              Home
+            </Link>
+            <Link to="/about" className="nav-link" onClick={closeMenu}>
+              About Me
+            </Link>
+            <Link to="/contact" className="nav-link" onClick={closeMenu}>
               Get In Touch
             </Link>
           </div>
