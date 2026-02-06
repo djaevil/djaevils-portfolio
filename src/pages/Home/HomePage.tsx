@@ -3,10 +3,10 @@ import NameSwitcher from "@/components/NameSwitcher";
 import HeroSection from "@/components/HeroSection";
 import ProjectCard from "@/features/projects/components/ProjectCard";
 import { projects } from "@/features/projects/data/projects";
+import { useSiteStats } from "@/hooks/useSiteStats";
 
 const HomePage: React.FC = () => {
-  const [clicks, setClicks] = useState(0);
-  const [totalVisits] = useState(0);
+  const { totalVisits, clicks, isConnected, incrementClicks } = useSiteStats();
   const [selectedTag, setSelectedTag] = useState<string>("All");
   const [selectedStatus, setSelectedStatus] = useState<string>("All");
   const [showAllProjects, setShowAllProjects] = useState(false);
@@ -192,6 +192,12 @@ const HomePage: React.FC = () => {
           <div className="lg:col-span-1 space-y-6">
             <h2 className="mb-8 text-gray-900 text-2xl font-bold">
               Site stats
+              <span
+                className={`ml-2 inline-block w-2 h-2 rounded-full ${
+                  isConnected ? "bg-green-500" : "bg-red-500"
+                }`}
+                title={isConnected ? "Connected" : "Disconnected"}
+              />
             </h2>
 
             <div className="bg-linear-to-br from-gray-800 to-gray-900 text-white p-6 rounded-xl shadow-lg">
@@ -211,7 +217,7 @@ const HomePage: React.FC = () => {
               <div className="text-3xl text-center mb-6">{clicks}</div>
               <div className="text-center">
                 <button
-                  onClick={() => setClicks(clicks + 1)}
+                  onClick={incrementClicks}
                   className="px-5 py-2 bg-white text-green-950 font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-md cursor-pointer"
                 >
                   Click Me!

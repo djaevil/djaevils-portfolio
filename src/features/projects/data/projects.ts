@@ -3,19 +3,19 @@ import { type Project } from "@/features/projects/types";
 export const projects: Project[] = [
   {
     id: "project-1",
-    title: "E-Commerce Platform",
+    title: "Portfolio Website",
     description:
-      "A platform that will simulate a real e-commerce website with user creation, product listings, and a shopping cart, as well as payment integration.",
-    tags: ["Web Dev", "Stripe"],
-    status: "Upcoming",
+      "This very website! Destined to be a showcase of my web development skills and projects, as well as a platform where you can have fun both alone and with others.",
+    tags: ["Web Dev", "WebSockets", "DevOps"],
+    status: "In-progress",
   },
   {
     id: "project-2",
     title: "Game Hub",
     description:
       "A website that will serve as a hub for various web-based games that I have created, allowing users to play, rate, and comment on games.",
-    tags: ["Web Dev", "Various technologies"],
-    status: "On hold",
+    tags: ["Web Dev", "Redis", "Various technologies"],
+    status: "In-progress",
   },
   {
     id: "project-3",
