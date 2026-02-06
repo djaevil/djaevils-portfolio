@@ -89,7 +89,7 @@ const ContactPage: React.FC = () => {
 
           {/* Resume Card */}
           <a
-            href="/resume.pdf"
+            href="/cv-SiggeKingborg-en.pdf"
             download
             className="bg-white rounded-xl p-8 hover:shadow-2xl transition-all group"
           >
@@ -108,7 +108,7 @@ const ContactPage: React.FC = () => {
             <h3 className="text-lg font-medium text-gray-900 mb-2">Resume</h3>
             <p className="text-sm text-gray-600 mb-4">Download my CV</p>
             <div className="text-green-600 text-sm font-medium">
-              PDF • 245KB
+              PDF • 172KB
             </div>
           </a>
         </div>

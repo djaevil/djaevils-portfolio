@@ -8,6 +8,7 @@ export const projects: Project[] = [
       "This very website! Destined to be a showcase of my web development skills and projects, as well as a platform where you can have fun both alone and with others.",
     tags: ["Web Dev", "WebSockets", "DevOps"],
     status: "In-progress",
+    githubUrl: ["https://github.com/djaevil/djaevils-portfolio"],
   },
   {
     id: "project-2",
@@ -45,7 +46,6 @@ export const projects: Project[] = [
       "This is a description for Example Project 5. It showcases the use of various web technologies.",
     tags: ["Web Dev"],
     status: "In-progress",
-    link: "http://localhost:5173/",
   },
   {
     id: "project-6",
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     description:
       "This is a description for Example Project 6. It is currently under development.",
     tags: ["Web Dev", "TypeScript"],
-    status: "In-progress",
+    status: "Completed",
   },
   {
     id: "project-7",
@@ -62,7 +62,6 @@ export const projects: Project[] = [
       "This is a description for Example Project 7. It showcases the use of various web technologies.",
     tags: ["Web Dev"],
     status: "In-progress",
-    link: "http://localhost:5173/",
   },
   {
     id: "project-8",
@@ -70,23 +69,6 @@ export const projects: Project[] = [
     description:
       "This is a description for Example Project 8. It is currently under development.",
     tags: ["Web Dev", "TypeScript"],
-    status: "In-progress",
-  },
-  {
-    id: "project-9",
-    title: "Example Project 9",
-    description:
-      "This is a description for Example Project 9. It showcases the use of various web technologies.",
-    tags: ["Web Dev"],
-    status: "In-progress",
-    link: "http://localhost:5173/",
-  },
-  {
-    id: "project-10",
-    title: "Example Project 10",
-    description:
-      "This is a description for Example Project 10. It is currently under development.",
-    tags: ["Web Dev", "TypeScript"],
-    status: "In-progress",
+    status: "On hold",
   },
 ];

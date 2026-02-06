@@ -7,7 +7,7 @@ interface SiteStats {
   isConnected: boolean;
 }
 
-const WS_URL = import.meta.env.VITE_WS_URL || "ws://localhost:3001";
+const WS_URL = import.meta.env.VITE_WS_URL;
 
 export function useSiteStats(): SiteStats & { incrementClicks: () => void } {
   const [totalVisits, setTotalVisits] = useState(0);
